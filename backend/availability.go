@@ -113,7 +113,7 @@ func getEligibleMatchesForRefereeHandler(w http.ResponseWriter, r *http.Request)
 				WHERE mr.match_id = m.id AND mr.assigned_referee_id = $1
 			)
 		  )
-		ORDER BY m.match_date, m.start_time
+		ORDER BY m.match_date ASC, m.start_time ASC, m.id ASC
 	`, user.ID)
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Database error: %v", err), http.StatusInternalServerError)

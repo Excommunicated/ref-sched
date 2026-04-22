@@ -2,9 +2,20 @@
 .env
 .env.local
 .env.*.local
+.env.production
 
 # Database data
 postgres_data/
+
+# Backups
+backups/
+*.sql
+*.sql.gz
+
+# Nginx (not used with Traefik, but keeping for reference)
+nginx/conf.d/*.conf
+!nginx/conf.d/*.conf.template
+certbot/
 
 # OS files
 .DS_Store

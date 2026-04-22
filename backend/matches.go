@@ -393,7 +393,7 @@ func listMatchesHandler(w http.ResponseWriter, r *http.Request) {
 		       location, description, reference_id, status, created_by, created_at, updated_at
 		FROM matches
 		WHERE status != 'deleted'
-		ORDER BY match_date ASC, start_time ASC
+		ORDER BY match_date ASC, start_time ASC, id ASC
 	`
 
 	rows, err := db.Query(query)
