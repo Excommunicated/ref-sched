@@ -40,7 +40,7 @@ You now have a fully functional referee scheduling application with authenticati
 - Users, matches, match_roles, availability tables
 - Day-level unavailability tracking
 - Assignment history audit trail
-- Automated migrations (5 migration files)
+- Automated migrations (6 migration files)
 - Timezone handling (US Eastern)
 
 ✅ **Infrastructure**
@@ -104,7 +104,7 @@ ref-sched/
 │   ├── assignments.go               # Assignment operations
 │   ├── acknowledgment.go            # Assignment acknowledgment
 │   ├── day_unavailability.go        # Day-level unavailability
-│   ├── migrations/                  # SQL migrations (5 files)
+│   ├── migrations/                  # SQL migrations (6 files)
 │   └── Dockerfile                   # Backend container
 │
 ├── frontend/                         # SvelteKit app
@@ -128,18 +128,17 @@ ref-sched/
 │
 └── Documentation/
     ├── README.md                         # Project overview
-    ├── PROJECT_STATUS.md                 # Current status (86% complete)
+    ├── PROJECT_STATUS.md                 # Current status (91% complete)
     ├── STORIES.md                        # All epics and stories
     ├── QUICK_START.md                    # 5-minute guide
     ├── SETUP.md                          # Detailed setup
     ├── GETTING_STARTED.md                # This file
     ├── TESTING_GUIDE.md                  # Testing instructions
-    ├── EPIC1_IMPLEMENTATION_REPORT.md    # Epic 1 details
-    ├── EPIC2_IMPLEMENTATION_REPORT.md    # Epic 2 details
-    ├── EPIC3_PROGRESS.md                 # Epic 3 status
-    ├── EPIC4_IMPLEMENTATION_REPORT.md    # Epic 4 details
-    ├── EPIC5_IMPLEMENTATION_REPORT.md    # Epic 5 details
-    └── EPIC6_IMPLEMENTATION_REPORT.md    # Epic 6 details
+    ├── DEPLOYMENT.md                     # Production deployment
+    └── docs/
+        ├── implementation-reports/       # Epic implementation details
+        ├── architecture/                 # Technical architecture
+        └── session-reports/              # Development history
 ```
 
 ---
@@ -422,7 +421,7 @@ SELECT id, email, name, role, status FROM users;
 - **STORIES.md**: All epics and stories
 - **SETUP.md**: Detailed Google OAuth setup
 - **QUICK_START.md**: 5-minute quickstart
-- **EPIC1_IMPLEMENTATION_REPORT.md**: Complete implementation details
+- **docs/implementation-reports/**: Complete implementation details for all epics
 - **README.md**: Project overview
 
 ---
@@ -433,7 +432,7 @@ For issues or questions:
 1. Check the troubleshooting section above
 2. Review `SETUP.md` for detailed setup steps
 3. Check logs: `make logs`
-4. Review `EPIC1_IMPLEMENTATION_REPORT.md` for implementation details
+4. Review `docs/implementation-reports/` for implementation details
 
 ---
 

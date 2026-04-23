@@ -221,12 +221,22 @@ Common commands:
 - Check CORS configuration in `backend/main.go`
 - Verify `VITE_API_URL` in docker-compose.yml
 
-## Next Steps
+## Documentation
 
-Epics 1-6 are complete! The application is feature-complete and ready for deployment.
+See **[DOCS_INDEX.md](DOCS_INDEX.md)** for a complete guide to all documentation.
 
-Remaining:
-- Epic 7: Azure deployment (production infrastructure)
+Key documents:
+- **[GETTING_STARTED.md](GETTING_STARTED.md)** - Setup and usage guide
+- **[DEPLOYMENT.md](DEPLOYMENT.md)** - Production deployment guide
+- **[PROJECT_STATUS.md](PROJECT_STATUS.md)** - Current status (91% complete)
+- **[STORIES.md](STORIES.md)** - All epics and user stories
+
+## Project Status
+
+✅ **Epics 1-6 Complete** - All core features implemented  
+🚧 **Epic 7 In Progress** - Self-hosted deployment infrastructure ready
+
+See [PROJECT_STATUS.md](PROJECT_STATUS.md) for detailed status.
 
 ## License
 

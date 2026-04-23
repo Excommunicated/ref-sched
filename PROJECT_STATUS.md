@@ -1,16 +1,16 @@
 # Referee Scheduler - Project Status
 
-**Date**: 2026-04-21  
+**Date**: 2026-04-23  
 **Project**: Referee Scheduling Application  
 **Developer**: Matt with Claude Code assistance  
 **Target**: Production-ready MVP by August 2026
 
 ---
 
-## 🎯 Overall Status: 86% COMPLETE
+## 🎯 Overall Status: 91% COMPLETE
 
 **Core MVP**: ✅ **COMPLETE**  
-**Deployment**: ⏸️ Pending (Epic 7)
+**Deployment**: 🚧 In Progress (Epic 7)
 
 ---
 
@@ -24,11 +24,11 @@
 | **Epic 4** - Eligibility & Availability | ✅ COMPLETE | 100% | 3/3 |
 | **Epic 5** - Assignment Interface | ✅ COMPLETE | 100% | 4/4 |
 | **Epic 6** - Referee Assignment View | ✅ COMPLETE | 100% | 2/2 |
-| **Epic 7** - Deployment | ⏸️ PENDING | 0% | 0/2 |
+| **Epic 7** - Deployment | 🚧 IN PROGRESS | 50% | 1/2 |
 
-**Total Stories**: 22/23 complete (96%)  
+**Total Stories**: 23/24 complete (96%)  
 **MVP Stories**: 22/22 complete (100%) — All MVP stories complete!  
-**Required for Launch**: 20/20 complete (100%)
+**Required for Launch**: 20/21 complete (95%)
 
 ---
 
@@ -121,6 +121,17 @@
 - ✅ Matches on unavailable days excluded from eligible match list
 - ✅ Day unavailability persisted in database
 
+### Deployment Infrastructure
+- ✅ Production Docker configuration (docker-compose.prod.yml)
+- ✅ Multi-stage production Dockerfile for frontend
+- ✅ Traefik reverse proxy integration with labels
+- ✅ Nginx configuration for optimized static asset serving
+- ✅ SSL/HTTPS setup scripts (Let's Encrypt via certbot)
+- ✅ Database backup and restore automation
+- ✅ Environment configuration (.env.production.example)
+- ✅ Deployment scripts (initial-setup.sh, ssl-setup.sh, traefik-setup.sh)
+- ✅ Complete deployment documentation
+
 ---
 
 ## ⏸️ What's Pending
@@ -132,15 +143,18 @@
   - **Decision**: Can be added later if duplicate issues arise in production
 
 ### Epic 7 - Deployment
-- ⏸️ **Story 7.1**: Docker containerization
-  - Partially complete: Local Docker Compose setup working
-  - Pending: Production-ready container images
-- ⏸️ **Story 7.2**: Azure deployment
-  - Deploy to Microsoft Azure (free tier)
-  - HTTPS enforcement
-  - PostgreSQL managed service
-  - Daily backups
-  - CI/CD pipeline (optional)
+- ✅ **Story 7.1**: Docker containerization & self-hosted deployment
+  - Production-ready Docker images (Dockerfile.prod for frontend)
+  - Production docker-compose.yml with Traefik reverse proxy
+  - Nginx configuration for static assets and proxy
+  - SSL/HTTPS setup scripts (Let's Encrypt)
+  - Database backup and restore scripts
+  - Complete deployment documentation (DEPLOYMENT.md)
+  - .env.production.example template
+- ⏸️ **Story 7.2**: Cloud deployment (optional)
+  - Current: Self-hosted deployment ready
+  - Future: Azure/cloud deployment if needed
+  - All infrastructure is cloud-agnostic
 
 ---
 
@@ -215,12 +229,10 @@ ref-sched/
 ├── PRD.md
 ├── STORIES.md
 └── docs/
-    ├── EPIC1_IMPLEMENTATION_REPORT.md
-    ├── EPIC2_IMPLEMENTATION_REPORT.md
-    ├── EPIC3_PROGRESS.md
-    ├── EPIC4_IMPLEMENTATION_REPORT.md
-    ├── EPIC5_IMPLEMENTATION_REPORT.md
-    └── EPIC6_IMPLEMENTATION_REPORT.md
+    └── docs/
+        ├── implementation-reports/   # Epic implementation details
+        ├── architecture/             # Technical architecture & ADRs
+        └── session-reports/          # Development history
 ```
 
 ---
@@ -444,13 +456,13 @@ ref-sched/
 - Restart services: `docker-compose restart`
 
 ### For Data Issues
-- View assignment history: See EPIC5_IMPLEMENTATION_REPORT.md for SQL queries
+- View assignment history: See docs/implementation-reports/EPIC5_IMPLEMENTATION_REPORT.md for SQL queries
 - Purge matches: `DELETE FROM matches CASCADE;`
 - Reset referee status: `UPDATE users SET status='pending' WHERE role='referee';`
 
 ### Common Operations
 - Add assignor: `UPDATE users SET role='assignor', status='active' WHERE email='user@example.com';`
-- View current assignments: See SQL in EPIC5_IMPLEMENTATION_REPORT.md
+- View current assignments: See SQL in docs/implementation-reports/EPIC5_IMPLEMENTATION_REPORT.md
 - Check eligibility: Call `GET /api/matches/{id}/eligible-referees?role=center`
 
 ---
