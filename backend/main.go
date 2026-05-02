@@ -1,8 +1,9 @@
 package main
 
 import (
+	"crypto/rand"
+	"encoding/base64"
 	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
 	"time"
@@ -163,7 +164,7 @@ func main() {
 	eligibilityHandler.RegisterRoutes(r, authMW.RequireAuth, rbacMW.RequirePermission)
 	matchReportsHandler.RegisterRoutes(r, authMW.RequireAuth)
 	auditHandler.RegisterRoutes(r, rbacMW.RequirePermission)
-	rbacHandler.RegisterRoutes(r, rbacMW.RequirePermission)
+	rbacHandler.RegisterRoutes(r, authMW.RequireAuth, rbacMW.RequirePermission)
 
 	// Match retention purge route
 	r.HandleFunc("/api/admin/matches/purge", rbacMW.RequirePermission("can_view_audit_logs", purgeArchivedMatchesHandler(matchRetentionService))).Methods("POST")
@@ -187,7 +188,12 @@ func healthHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func googleAuthHandler(w http.ResponseWriter, r *http.Request) {
-	state := fmt.Sprintf("%d", time.Now().UnixNano())
+	b := make([]byte, 32)
+	if _, err := rand.Read(b); err != nil {
+		http.Error(w, "Failed to generate random state", http.StatusInternalServerError)
+		return
+	}
+	state := base64.URLEncoding.EncodeToString(b)
 
 	session, _ := sessionStore.Get(r, "auth-session")
 	session.Values["oauth_state"] = state

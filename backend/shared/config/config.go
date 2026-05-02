@@ -79,6 +79,22 @@ func (c *Config) validate() {
 	if len(missing) > 0 {
 		log.Fatalf("Missing required environment variables: %v", missing)
 	}
+
+	if c.IsProduction() {
+		knownDefaults := map[string]bool{
+			"dev_session_secret_change_in_production": true,
+			"changeme":       true,
+			"secret":         true,
+			"session_secret": true,
+			"default":        true,
+		}
+		if knownDefaults[c.SessionSecret] {
+			log.Fatalf("In production, SESSION_SECRET must be set to a secure value and not a known default")
+		}
+		if len(c.SessionSecret) < 32 {
+			log.Fatalf("In production, SESSION_SECRET must be at least 32 characters long")
+		}
+	}
 }
 
 // ensureDatabaseTimezone adds timezone parameter to database URL if not present

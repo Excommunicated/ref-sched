@@ -84,22 +84,28 @@ func (a *Logger) processLogs() {
 	}
 }
 
+func ptr(s string) *string {
+	return &s
+}
+
 func (a *Logger) writeLog(entry Entry) error {
-	var oldValuesJSON, newValuesJSON []byte
+	var oldValuesJSON, newValuesJSON *string
 	var err error
 
 	if entry.OldValues != nil {
-		oldValuesJSON, err = json.Marshal(entry.OldValues)
+		ovj, err := json.Marshal(entry.OldValues)
 		if err != nil {
 			return err
 		}
+		oldValuesJSON = ptr(string(ovj))
 	}
 
 	if entry.NewValues != nil {
-		newValuesJSON, err = json.Marshal(entry.NewValues)
+		nvj, err := json.Marshal(entry.NewValues)
 		if err != nil {
 			return err
 		}
+		newValuesJSON = ptr(string(nvj))
 	}
 
 	query := `
